@@ -9,9 +9,10 @@ TagManager:
   - eye
   - Consumable2D
   - Wall
-  - GamePanel
   - Red
   - Green
+  - MainMenu
+  - GameMenu
   layers:
   - Default
   - TransparentFX
