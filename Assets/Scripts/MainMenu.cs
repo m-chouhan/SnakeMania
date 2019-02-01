@@ -35,6 +35,7 @@ public class MainMenu : MonoBehaviour
     }
     public void toggleMusic() {
         Debug.Log("Toggle Music");
+        gameController.toggleMusic();
     }
     public void endGame(int time) {
         Debug.Log("Game Ended in "+ time.ToString());

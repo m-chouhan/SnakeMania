@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -49,6 +50,12 @@ public class Snake2D : MonoBehaviour
             currentDir = DIR.UP;
         return currentDir;    
     }
+
+    internal void setLength(int length)
+    {
+        tail.time = length*0.1f;
+    }
+
     // Update is called once per frame
     void Update()
     {

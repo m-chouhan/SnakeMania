@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
         FINISHED
     }
     public static GameState currentGameState;
-    public const int MAX_REQUIRED = 2; 
+    public const int MAX_REQUIRED = 10; 
     public Text scoreText;
     public Text winText;
     public Text restartText;
@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour
     public Text timerText;
     private int remainingItems;
     private float timer;
+    private Snake2D playerScript;
+    private AudioSource audioSource;
     void Start()
     {
         currentGameState = GameState.NOT_STARTED;
@@ -29,10 +31,16 @@ public class GameController : MonoBehaviour
         if(menuObject != null)
             mainMenu = menuObject.GetComponent<MainMenu>();
         else Debug.Log("Unable to find main menu controller");
+        GameObject snake = GameObject.FindWithTag("Player");
+        if(snake != null)
+            playerScript = snake.GetComponent<Snake2D>();
+        else Debug.Log("Unable to find player script");
+        audioSource = GetComponent<AudioSource>();
     }
     public void startGame() {
         Debug.Log("Starting new Game!");
         currentGameState = GameState.IN_PROGRESS;
+        playerScript.setLength(2);
         timer = 0;
         Time.timeScale = 1f;
         remainingItems = MAX_REQUIRED;
@@ -54,6 +62,11 @@ public class GameController : MonoBehaviour
         Debug.Log("Resuming game!");
         currentGameState = GameState.IN_PROGRESS;
         Time.timeScale = 1f;
+    }
+    public void toggleMusic() {
+        if(audioSource.isPlaying)
+            audioSource.Pause();
+        else audioSource.Play();
     }
     public void updateScoreBy(int delta) {
         remainingItems -= delta;
