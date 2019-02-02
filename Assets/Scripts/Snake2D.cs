@@ -15,7 +15,6 @@ public class Snake2D : MonoBehaviour
     void Start()
     {
         historyQ = new List<Vector3>();
-        dir = DIR.LEFT;
         rb = GetComponent<Rigidbody2D>();
         tail = GetComponent<TrailRenderer>();
         tail.time = 0.2f;
@@ -30,55 +29,19 @@ public class Snake2D : MonoBehaviour
         }
         else Debug.Log("Unable to find game contoller");
     }
-
-    enum DIR { UP, LEFT, DOWN, RIGHT }
-    DIR dir;
-
-    DIR getDirection() {
-        float moveHorizontal = //joystick.Horizontal + 
-                Input.GetAxis ("Horizontal");
-        float moveVertical = //joystick.Vertical + 
-                Input.GetAxis ("Vertical");
-        DIR currentDir = dir;
-        if(moveHorizontal < 0)
-           currentDir = DIR.LEFT;
-        else if(moveHorizontal > 0)
-            currentDir = DIR.RIGHT;
-        else if(moveVertical < 0)
-            currentDir = DIR.DOWN;
-        else if(moveVertical > 0)
-            currentDir = DIR.UP;
-        return currentDir;    
-    }
-
     internal void setLength(int length)
     {
-        tail.time = length*0.1f;
+        tail.time = length * 0.1f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        dir = getDirection();
-        Vector2 velocity = new Vector2 (0, 0);
-        switch(dir) {
-            case DIR.UP:
-                velocity.y = speed;
-            break;
-            case DIR.LEFT:
-                velocity.x = -speed;
-            break;
-            case DIR.DOWN:
-                velocity.y = -speed;
-            break;
-            case DIR.RIGHT:
-                velocity.x = speed;
-            break;
-        }
-
-        velocity = new Vector2((joystick.Horizontal + Input.GetAxis("Horizontal")) * speed,
-                                  (joystick.Vertical + Input.GetAxis("Vertical")) * speed);
-
+        float xVelo = (joystick != null ? joystick.Horizontal : 0) 
+                            + Input.GetAxis("Horizontal");
+        float yVelo = (joystick != null ? joystick.Vertical : 0) 
+                            + Input.GetAxis("Vertical");
+        Vector2 velocity = new Vector2(xVelo*speed, yVelo*speed);
         transform.rotation = Quaternion.LookRotation(Vector3.forward, velocity);
 
         rb.velocity = velocity;
