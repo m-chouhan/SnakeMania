@@ -8,19 +8,32 @@ public class Snake2D : MonoBehaviour
 {
     public float speed;
     public Joystick joystick;
-    private List<Vector3> historyQ;
+    public GameObject tailPrefab;
+    public float maxScaleDiff = 0.08f;
+    public float cycleCount = 4f;
+    private List<Trans> historyQ;
+    private List<GameObject> tailList;
     private Rigidbody2D rb;
     private TrailRenderer tail;
     private GameController gameController;
+    private class Trans {
+        public Vector3 pos; //current position
+        public Quaternion quat; //current rotation
+        public Trans(Vector3 pos,Quaternion quat) { this.pos = pos; this.quat = quat;}
+    }
     void Start()
     {
-        historyQ = new List<Vector3>();
+        historyQ = new List<Trans>();
+        tailList = new List<GameObject>();
         rb = GetComponent<Rigidbody2D>();
         tail = GetComponent<TrailRenderer>();
-        tail.time = 0.2f;
-        for(int i = 0; i < transform.childCount; ++i) {
-            if(!transform.GetChild(i).CompareTag("eye"))
-                historyQ.Add(transform.position);
+        tail.time = 0.1f;
+        for(int i = 0; i < 50; ++i) {
+            historyQ.Add(new Trans(transform.position,transform.rotation));
+            GameObject tail = 
+                Instantiate(tailPrefab,transform.position,Quaternion.identity);
+            tail.transform.localScale += getScaleFactorFor(i);
+            tailList.Add(tail);
         }
 
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
@@ -29,11 +42,15 @@ public class Snake2D : MonoBehaviour
         }
         else Debug.Log("Unable to find game contoller");
     }
-    internal void setLength(int length)
+    public void setLength(int length)
     {
         tail.time = length * 0.1f;
     }
 
+    private Vector3 getScaleFactorFor(float index) {
+        float scaleFactor = (float) Math.Sin((Math.PI/180)*(index/50)* 180*cycleCount) * maxScaleDiff;
+        return new Vector3(scaleFactor,scaleFactor,1);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -42,14 +59,17 @@ public class Snake2D : MonoBehaviour
         float yVelo = (joystick != null ? joystick.Vertical : 0) 
                             + Input.GetAxis("Vertical");
         Vector2 velocity = new Vector2(xVelo*speed, yVelo*speed);
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, velocity);
+        if(velocity != Vector2.zero)
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, velocity);
 
         rb.velocity = velocity;
-        historyQ.Add(transform.position);
-        historyQ.RemoveAt(0);
-        for(int i = 0; i < transform.childCount; ++i) {
-            if(!transform.GetChild(i).CompareTag("eye"))
-               transform.GetChild(i).position = historyQ[i];
+        if(Vector2.Distance(tailList[49].transform.position,transform.position) > 0.1f) {
+            historyQ.Add(new Trans(transform.position,transform.rotation));
+            historyQ.RemoveAt(0);
+            for(int i = 0; i < 50; ++i) {
+                tailList[i].transform.position = historyQ[i].pos;
+                tailList[i].transform.rotation = historyQ[i].quat;
+            }
         }
     }
     void OnTriggerEnter2D(Collider2D other) 
