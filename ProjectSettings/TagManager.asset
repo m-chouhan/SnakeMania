@@ -11,6 +11,7 @@ TagManager:
   - MainMenu
   - GameMenu
   - Tail
+  - Dead
   layers:
   - Default
   - TransparentFX

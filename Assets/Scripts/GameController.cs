@@ -72,14 +72,14 @@ public class GameController : MonoBehaviour
         remainingItems -= delta;
         scoreText.text = "Remaining : "+ remainingItems.ToString();
         if(remainingItems <= 0)
-            Invoke("endGame",1f);
+            Invoke("endGame",0.5f);
         else 
             Invoke("createConsumable",1f);     
     }
 
     //TODO : adds time penalty on every invalid collision
     public void addTimePenalty() {
-        timer += 2f;
+        timer += 4f;
     }
     public void createConsumable() {
         Instantiate(

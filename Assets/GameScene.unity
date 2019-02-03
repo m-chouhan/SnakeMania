@@ -1831,11 +1831,11 @@ MonoBehaviour:
     lineCount: 2
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2365,11 +2365,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -3160,20 +3160,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1154813898}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1304769308}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1304769310}
+        m_MethodName: restartGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3343,6 +3332,36 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7974213282848373785, guid: 9b4a5cefe39604e8795dc7fb2095f95b,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974213282848373785, guid: 9b4a5cefe39604e8795dc7fb2095f95b,
+        type: 3}
+      propertyPath: m_PixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974213282848373785, guid: 9b4a5cefe39604e8795dc7fb2095f95b,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974213282848373784, guid: 9b4a5cefe39604e8795dc7fb2095f95b,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1280
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974213282848373784, guid: 9b4a5cefe39604e8795dc7fb2095f95b,
+        type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 640
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974213282848373784, guid: 9b4a5cefe39604e8795dc7fb2095f95b,
+        type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7905530556934836939, guid: 9b4a5cefe39604e8795dc7fb2095f95b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3363,39 +3382,9 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 350
       objectReference: {fileID: 0}
-    - target: {fileID: 7974213282848373784, guid: 9b4a5cefe39604e8795dc7fb2095f95b,
-        type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1280
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974213282848373784, guid: 9b4a5cefe39604e8795dc7fb2095f95b,
-        type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 640
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974213282848373784, guid: 9b4a5cefe39604e8795dc7fb2095f95b,
-        type: 3}
-      propertyPath: m_MatchWidthOrHeight
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7975782773064328227, guid: 9b4a5cefe39604e8795dc7fb2095f95b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974213282848373785, guid: 9b4a5cefe39604e8795dc7fb2095f95b,
-        type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974213282848373785, guid: 9b4a5cefe39604e8795dc7fb2095f95b,
-        type: 3}
-      propertyPath: m_PixelPerfect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7974213282848373785, guid: 9b4a5cefe39604e8795dc7fb2095f95b,
-        type: 3}
-      propertyPath: m_RenderMode
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3535,11 +3524,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -4277,12 +4266,12 @@ PrefabInstance:
     - target: {fileID: 3916908733791445715, guid: b99d74a38b97243268bf5bb73a88ad6f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3916908733791445715, guid: b99d74a38b97243268bf5bb73a88ad6f,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3916908733791445714, guid: b99d74a38b97243268bf5bb73a88ad6f,
         type: 3}
@@ -4294,6 +4283,22 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 1435914585}
+    - target: {fileID: 3916908733791445714, guid: b99d74a38b97243268bf5bb73a88ad6f,
+        type: 3}
+      propertyPath: tailPrefab
+      value: 
+      objectReference: {fileID: 952017778, guid: 065b5aa8672854d1eb57ffdaa3f205db,
+        type: 3}
+    - target: {fileID: 3916908733791445714, guid: b99d74a38b97243268bf5bb73a88ad6f,
+        type: 3}
+      propertyPath: curveFactor
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916908733791445714, guid: b99d74a38b97243268bf5bb73a88ad6f,
+        type: 3}
+      propertyPath: startLength
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3916908733791445727, guid: b99d74a38b97243268bf5bb73a88ad6f,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -4343,6 +4348,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Time
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916908733791445713, guid: b99d74a38b97243268bf5bb73a88ad6f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b99d74a38b97243268bf5bb73a88ad6f, type: 3}

@@ -9,9 +9,9 @@ public class Snake2D : MonoBehaviour
     public float speed;
     public Joystick joystick;
     public GameObject tailPrefab;
-    public float maxScaleDiff = 0.08f;
-    public float curveFactor = 4f;
-    public float unitDistance = 0.05f;
+    public float maxScaleDiff = 0.1f;
+    public float curveFactor = 10f;
+    public float unitDistance = 0.1f;
     public int startLength = 10;
     private List<Trans> historyQ;
     private List<GameObject> trailList;
@@ -34,11 +34,15 @@ public class Snake2D : MonoBehaviour
         tail = GetComponent<TrailRenderer>();
         tail.time = 0.1f;
         for(int i = 0; i < startLength; ++i) {
-            historyQ.Add(new Trans(transform.position,transform.rotation));
+            historyQ.Insert(0,new Trans(transform.position,transform.rotation));
             GameObject tail = 
                 Instantiate(tailPrefab,transform.position,transform.rotation);
-            tail.transform.localScale += getScaleFactorFor(i);
-            trailList.Add(tail);
+            trailList.Insert(0,tail);
+            tail.transform.localScale += getScaleFactorFor(trailList.Count);
+            tail.GetComponent<BoxCollider2D>().enabled = false;
+            Color semitrans = tail.GetComponent<SpriteRenderer>().color;
+            semitrans.a = 0.51f;
+            tail.GetComponent<SpriteRenderer>().color = semitrans;
         }
 
         GameObject gameControllerObject = GameObject.FindWithTag("GameController");
@@ -52,6 +56,15 @@ public class Snake2D : MonoBehaviour
         tail.time = length * 0.1f;
     }
 
+    private void increaseLength() {
+        for(int i = 0;i < 4; ++i) {
+            GameObject trail = 
+                Instantiate(tailPrefab,historyQ[0].pos,historyQ[0].quat);
+            historyQ.Insert(0,historyQ[0].Clone());
+            trailList.Insert(0,trail);
+            trail.transform.localScale += getScaleFactorFor(trailList.Count);
+        }
+    }
     private Vector3 getScaleFactorFor(float index) {
         float scaleFactor = (float) Math.Sin((Math.PI/180)*index* curveFactor) * maxScaleDiff;
         return new Vector3(scaleFactor,scaleFactor,1);
@@ -63,11 +76,13 @@ public class Snake2D : MonoBehaviour
                             + Input.GetAxis("Horizontal");
         float yVelo = (joystick != null ? joystick.Vertical : 0) 
                             + Input.GetAxis("Vertical");
-        Vector2 velocity = new Vector2(xVelo*speed, yVelo*speed);
+        Vector2 velocity = Vector2.ClampMagnitude(new Vector2(xVelo, yVelo),1);
+        if(velocity.magnitude < 0.5f)
+            velocity.Set(0,0);        
         if(velocity != Vector2.zero)
             transform.rotation = Quaternion.LookRotation(Vector3.forward, velocity);
 
-        rb.velocity = velocity;
+        rb.velocity = velocity*speed;
         if(Vector2.Distance(trailList[trailList.Count-1].transform.position,transform.position) > unitDistance) {
             historyQ.Add(new Trans(transform.position,transform.rotation));
             historyQ.RemoveAt(0);
@@ -76,22 +91,17 @@ public class Snake2D : MonoBehaviour
                 trailList[i].transform.rotation = historyQ[i].quat;
             }
         }
-        if(Input.GetKeyUp("space")) {
-            GameObject trail = 
-                Instantiate(tailPrefab,historyQ[0].pos,historyQ[0].quat);
-            historyQ.Insert(0,historyQ[0].Clone());
-            trailList.Insert(0,trail);
-            trail.transform.localScale += getScaleFactorFor(trailList.Count);
-        }
+        if(Input.GetKeyUp("space"))
+            increaseLength();
     }
     void OnTriggerEnter2D(Collider2D other) 
     {
-        Debug.Log("OnTrigger");
+        Debug.Log("OnTrigger with "+ other.tag);
         if (other.gameObject.CompareTag ("Consumable2D"))
         {
             Debug.Log("Collided with consumable");
-            tail.time += 0.1f;
             speed += 1;
+            increaseLength();
             other.gameObject.GetComponent<Renderer> ().material.color = Color.red;
             other.gameObject.tag = "Finish";
             GetComponent<AudioSource>().Play();
@@ -103,5 +113,11 @@ public class Snake2D : MonoBehaviour
             Debug.Log("Collided with Wall");
             gameController.addTimePenalty();
         }
+
+        else if(other.gameObject.CompareTag("Tail")) {
+            //gameController.addTimePenalty();
+            gameController.endGame();
+        }
+         
     }
 }

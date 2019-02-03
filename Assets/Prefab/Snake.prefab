@@ -100,6 +100,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   joystick: {fileID: 0}
+  tailPrefab: {fileID: 0}
+  maxScaleDiff: 0.08
+  curveFactor: 4
+  unitDistance: 0.05
+  startLength: 10
 --- !u!50 &3916908733791445713
 Rigidbody2D:
   serializedVersion: 4
@@ -145,7 +150,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.29, y: 1.29}
+  m_Size: {x: 0.9967499, y: 0.8742033}
   m_EdgeRadius: 0
 --- !u!96 &3916908733791445727
 TrailRenderer:
@@ -155,7 +160,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3916908733791445717}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

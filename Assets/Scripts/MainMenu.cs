@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -44,5 +45,8 @@ public class MainMenu : MonoBehaviour
                 time.ToString()+ " seconds");
         finalScoreMenu.SetActive(true);
         inGameMenu.SetActive(false);
+    }
+    public void restartGame() {
+        SceneManager.LoadScene("GameScene");
     }
 }
