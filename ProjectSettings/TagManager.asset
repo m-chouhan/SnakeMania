@@ -5,14 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - PickUp
-  - Blue
   - eye
   - Consumable2D
   - Wall
-  - Red
-  - Green
   - MainMenu
   - GameMenu
+  - Tail
   layers:
   - Default
   - TransparentFX

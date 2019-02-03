@@ -276,6 +276,31 @@ PrefabInstance:
       propertyPath: tailPrefab
       value: 
       objectReference: {fileID: 952017778}
+    - target: {fileID: 3916908733791445714, guid: b99d74a38b97243268bf5bb73a88ad6f,
+        type: 3}
+      propertyPath: cycleCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916908733791445714, guid: b99d74a38b97243268bf5bb73a88ad6f,
+        type: 3}
+      propertyPath: maxScaleDiff
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916908733791445714, guid: b99d74a38b97243268bf5bb73a88ad6f,
+        type: 3}
+      propertyPath: trailLength
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916908733791445714, guid: b99d74a38b97243268bf5bb73a88ad6f,
+        type: 3}
+      propertyPath: distanceFromHead
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916908733791445714, guid: b99d74a38b97243268bf5bb73a88ad6f,
+        type: 3}
+      propertyPath: curveFactor
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3916908733791445727, guid: b99d74a38b97243268bf5bb73a88ad6f,
         type: 3}
       propertyPath: m_Enabled
@@ -322,6 +347,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Echo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804766964256014340, guid: 4277b462328c9499db6d538d5631c69c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tail
       objectReference: {fileID: 0}
     - target: {fileID: 5804766964256014338, guid: 4277b462328c9499db6d538d5631c69c,
         type: 3}
